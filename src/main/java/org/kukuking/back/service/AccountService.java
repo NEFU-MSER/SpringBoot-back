@@ -15,10 +15,10 @@ public class AccountService {
     @Transactional
     public boolean login(String account, String password) {
         boolean result = false;
-        User user = userRepository.findUserByAccountAndPassword(account, password);
-        if (user != null) {
-            result = true;
-        }
+//        User user = userRepository.findUserByAccountAndPassword(account, password);
+//        if (user != null) {
+//            result = true;
+//        }
         return result;
     }
 }

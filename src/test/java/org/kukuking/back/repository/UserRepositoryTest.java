@@ -1,7 +1,7 @@
 package org.kukuking.back.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.kukuking.back.utils.Gender;
 import org.kukuking.back.dox.User;
 import org.springframework.beans.factory.annotation.Autowired;
