@@ -1,7 +1,6 @@
 package org.kukuking.back.repository;
 
 import org.kukuking.back.dox.User;
-import org.kukuking.back.mapper.UserResultSetExtractor;
 import org.kukuking.back.mapper.UserRowMapper;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
