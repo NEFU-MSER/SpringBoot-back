@@ -1,4 +1,4 @@
-package org.kukuking.back.utils;
+package org.kukuking.back.component.utils;
 
 public enum Gender {
     Male, Female;

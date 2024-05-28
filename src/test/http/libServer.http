@@ -1,0 +1,19 @@
+GET http://localhost:8080/api/lib/get
+
+###
+POST http://localhost:8080/api/lib/getAll
+
+###
+POST http://localhost:8080/api/lib/add
+Content-Type: application/json
+
+{
+  "name": "102",
+  "type": "傻瓜实验室"
+}
+
+###
+POST http://localhost:8080/api/lib/typeGet
+Content-Type: application/json
+
+"傻瓜实验室"

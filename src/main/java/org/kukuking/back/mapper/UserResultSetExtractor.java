@@ -1,32 +1,33 @@
 package org.kukuking.back.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import org.kukuking.back.dox.User;
+import org.kukuking.back.DO.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
-public class UserResultSetExtractor implements ResultSetExtractor<User> {
+public class UserResultSetExtractor implements ResultSetExtractor<List<User>> {
     @Override
-    public User extractData(ResultSet rs) throws SQLException, DataAccessException {
-        User user = null;
+    public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
+        List<User> users = new ArrayList<>();
         while (rs.next()) {
-            if (user == null) {
-                user = User.builder()
-                        .account(rs.getString("account"))
-                        .name(rs.getString("name"))
-                        .email(rs.getString("email"))
-                        .password(rs.getString("password"))
-                        .gender(rs.getInt("gender"))
-                        .createTime(rs.getObject("u.create_time", LocalDateTime.class))
-                        .updateTime(rs.getObject("u.update_time", LocalDateTime.class))
-                        .build();
-            }
+            users.add(User.builder()
+                    .id(rs.getString("id"))
+                    .account(rs.getString("account"))
+                    .name(rs.getString("name"))
+                    .email(rs.getString("email"))
+                    .password(rs.getString("password"))
+                    .gender(rs.getInt("gender"))
+                    .createTime(rs.getObject("u.create_time", LocalDateTime.class))
+                    .updateTime(rs.getObject("u.update_time", LocalDateTime.class))
+                    .build());
         }
-        return user;
+        return users;
     }
 }

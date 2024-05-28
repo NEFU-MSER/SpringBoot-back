@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    default-property-inclusion: non_null # 序列化时忽略空属性值
   datasource:
     url: 'jdbc:mysql://localhost:3306/curriculum'
     username: kukuking
@@ -6,8 +8,6 @@ spring:
   sql:
     init:
       mode: always
-server:
-  port: 8080
 logging:
   level:
     sql: debug
@@ -15,5 +15,6 @@ logging:
       example: debug
   pattern:
     console: '%-5level %C.%M[%line] - %msg%n'
-
+server:
+  port: 8080
 

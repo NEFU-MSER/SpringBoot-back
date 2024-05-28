@@ -2,10 +2,12 @@ package org.kukuking.back.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.kukuking.back.utils.Gender;
-import org.kukuking.back.dox.User;
+import org.kukuking.back.component.utils.Gender;
+import org.kukuking.back.DO.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 
 @SpringBootTest
@@ -17,10 +19,10 @@ public class UserRepositoryTest {
     @Test
     public void saveUser(){
         User user = User.builder()
-                .account("2021213196")
-                .password("112210ly")
-                .name("KUKUKING233")
-                .email("ly1112210@outlook.com")
+                .account("2021213220")
+                .password("123456789")
+                .name("张小鹏")
+                .email("zxp1112210@outlook.com")
                 .gender(Gender.Male.toInt())
                 .build();
         userRepository.save(user);
@@ -34,7 +36,15 @@ public class UserRepositoryTest {
 
     @Test
     public void findUserByAccountAndPassword() {
-        boolean ifExit = userRepository.findUserByAccountAndPassword("2021213196","112210ly") != null;
-        System.out.println(ifExit);
+        boolean ifPresent = userRepository.findUserByAccountAndPassword("2021213196","112210ly") != null;
+        System.out.println(ifPresent);
+    }
+
+    @Test
+    public void findUsersByGender() {
+        List<User> users = userRepository.findUsersByGender(Gender.Male.toInt());
+        for (User user : users) {
+            System.out.println(user);
+        }
     }
 }

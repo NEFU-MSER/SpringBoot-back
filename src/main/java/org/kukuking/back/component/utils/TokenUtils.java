@@ -1,4 +1,4 @@
-package org.kukuking.back.utils;
+package org.kukuking.back.component.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,14 +13,14 @@ import java.util.Base64;
 @Slf4j
 public class TokenUtils {
     private static final String HMAC_ALGORITHM = "HmacSHA256";
-    private static final String SECRET_KEY = "secret_key";
+    private static final String SECRET_KEY = "KUKUKING-securityKey";
 
     // 生成 Token
     public static String generateToken(LoginDetail loginDetail) {
         return generateToken(loginDetail.convert());
     }
 
-    public static String generateToken(String loginDetail) {
+    public static String generateToken(String loginDetail){
         try {
             // 创建 HMAC-SHA256 密钥
             SecretKeySpec secretKeySpec = new SecretKeySpec(SECRET_KEY.getBytes(), HMAC_ALGORITHM);
@@ -33,8 +33,7 @@ public class TokenUtils {
             // 返回 Token，格式为 loginDetail.signature
             return loginDetail + "." + signature;
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            log.error(e.getMessage(), e);
-            return null;
+            throw new RuntimeException("Error generating token", e);
         }
     }
 
@@ -66,5 +65,17 @@ public class TokenUtils {
             log.error(e.getMessage(), e);
             return false;
         }
+    }
+
+    public static String getAccount(String token){
+        String[] parts = token.split("\\.");
+        String loginDetail = parts[0];
+        String account = null;
+        try {
+             account = loginDetail.split("\"account\": \"")[1].split("\"")[0];
+        }catch (Exception e){
+            log.error(e.getMessage(), e);
+        }
+        return account;
     }
 }

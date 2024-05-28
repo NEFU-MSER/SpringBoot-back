@@ -1,6 +1,7 @@
 package org.kukuking.back.utils;
 
 import org.junit.Test;
+import org.kukuking.back.component.utils.LoginDetail;
 
 public class PayloadTest {
 
