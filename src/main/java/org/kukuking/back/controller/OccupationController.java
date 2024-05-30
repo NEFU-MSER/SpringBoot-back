@@ -38,7 +38,10 @@ public class OccupationController {
         if (TokenUtils.verifyToken(reqData.getToken())) {
             List<String> libIds = reqData.getData();
             List<Lib2Occupations> libs2Occupations = new ArrayList<>();
-            if (libIds != null && !libIds.isEmpty()) {
+            if (libIds == null) {
+                return ResultVO.error(400, "请求数据缺失");
+            }
+            if (!libIds.isEmpty()) {
                 for (String libId : libIds) {
                     if (libId != null) {
                         Lib2Occupations lib2Occupations = occupationService.getLib2Occupations(libId);
@@ -51,7 +54,7 @@ public class OccupationController {
                 }
                 return ResultVO.success(Map.of("libs2Occupation", libs2Occupations));
             }
-            return ResultVO.error(400, "请求数据缺失");
+            return ResultVO.error(405,"你还没有创建任何一个课程!");
         }
         return ResultVO.error(403, "token失效");
     }

@@ -42,6 +42,7 @@ public class UserController {
         String token;
         User checkUser = userService.getUserByAccount(user.getAccount());
         if (checkUser == null) {
+            user.setId(null);
             userService.saveUser(user);
             LoginDetail detail = new LoginDetail(user.getAccount(), user.getId(), 30);
             token = TokenUtils.generateToken(detail.convert());
@@ -73,7 +74,6 @@ public class UserController {
             String account = TokenUtils.getAccount(reqData.getToken());
             User user = reqData.getData();
             if (account != null && user != null) {
-                log.info("{}",account.equals(user.getAccount()));
                 if (account.equals(user.getAccount())) {
                     userService.updateUser(user);
                     return ResultVO.success(Map.of());
