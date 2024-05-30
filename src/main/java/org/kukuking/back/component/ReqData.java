@@ -2,8 +2,6 @@ package org.kukuking.back.component;
 
 import lombok.*;
 
-import java.util.Map;
-
 @Data
 @Builder
 @Getter

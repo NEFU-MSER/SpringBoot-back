@@ -20,7 +20,7 @@ public interface Course2OccupationRepository extends CrudRepository<Course2Occup
             where o.course_id = :courseId
             """,
             resultSetExtractorClass = Course2OccupationResultSetExtractor.class)
-    public Course2Occupations findCourseOccupation(String courseId);
+    Course2Occupations findCourseOccupation(String courseId);
 
     @Query(value = """
             select o.*,c.name as 'course_name',l.name as 'lib_name'
@@ -31,5 +31,5 @@ public interface Course2OccupationRepository extends CrudRepository<Course2Occup
             order by o.course_id
             """,
             resultSetExtractorClass = Courses2OccupationResultSetExtractor.class)
-    public List<Course2Occupations> findCoursesOccupation(List<String> courseId);
+    List<Course2Occupations> findCoursesOccupation(List<String> courseId);
 }

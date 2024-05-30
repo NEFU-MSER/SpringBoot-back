@@ -7,7 +7,7 @@ import org.kukuking.back.component.utils.TokenUtils;
 
 @Slf4j
 public class TokenUtilsTest {
-    LoginDetail loginDetail = new LoginDetail("2021213196","KUKUKING",30);
+    final LoginDetail loginDetail = new LoginDetail("2021213196","KUKUKING",30);
     String token;
     @Test
     public void generateToken() {

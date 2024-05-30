@@ -2,8 +2,6 @@ package org.kukuking.back.component.utils;
 
 import java.time.LocalDateTime;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Getter;
 import lombok.Setter;
 
