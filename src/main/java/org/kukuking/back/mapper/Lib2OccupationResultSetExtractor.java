@@ -22,9 +22,9 @@ public class Lib2OccupationResultSetExtractor implements ResultSetExtractor<Lib2
         while (rs.next()) {
             if (lib2Occupations.getLib() == null) {
                 Lib lib = Lib.builder()
-                        .id(rs.getString("id"))
-                        .name(rs.getString("name"))
-                        .type(rs.getString("type"))
+                        .id(rs.getString("lib_id"))
+                        .name(rs.getString("lib_name"))
+                        .type(rs.getString("lib_type"))
                         .createTime(rs.getObject("create_time", LocalDateTime.class))
                         .updateTime(rs.getObject("update_time", LocalDateTime.class))
                         .build();
@@ -32,8 +32,8 @@ public class Lib2OccupationResultSetExtractor implements ResultSetExtractor<Lib2
             }
             FrontOccupation frontOccupation = FrontOccupation.builder()
                     .id(rs.getString("id"))
-                    .libId(rs.getString("lib_id"))
-                    .libName(rs.getString("lib_name"))
+                    .courseId(rs.getString("course_id"))
+                    .courseName(rs.getString("course_name"))
                     .libId(rs.getString("lib_id"))
                     .libName(rs.getString("lib_name"))
                     .week(new int[]{rs.getInt("start_week"), rs.getInt("end_week")})

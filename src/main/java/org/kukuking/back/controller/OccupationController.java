@@ -85,7 +85,7 @@ public class OccupationController {
         if (TokenUtils.verifyToken(token)) {
             String id = reqData.getData();
             if (id != null) {
-                if (occupationService.deleteOccupation(id)) {
+                if (occupationService.deleteById(id)) {
                     return ResultVO.success(Map.of());
                 } else {
                     return ResultVO.error(405, "删除出错");
@@ -115,15 +115,21 @@ public class OccupationController {
     }
 
     @PostMapping("/change")
-    public ResultVO change(@RequestBody ReqData<Occupation> reqData) {
+    public ResultVO change(@RequestBody ReqData<FrontOccupation> reqData) {
         if (TokenUtils.verifyToken(reqData.getToken())) {
-            Occupation occupation = reqData.getData();
-            if (occupation.getId() != null) {
-                occupationService.update(occupation);
-                return ResultVO.success(Map.of());
+            FrontOccupation frontOccupation = reqData.getData();
+            if (frontOccupation != null) {
+                Occupation occupation = new Occupation(frontOccupation);
+                if (occupation.getId() != null) {
+                    String userId = TokenUtils.getId(reqData.getToken());
+                    occupation.setUserId(userId);
+                    occupationService.update(occupation);
+                    return ResultVO.success(Map.of());
+                }
             }
             return ResultVO.error(400, "请求数据错误");
         }
         return ResultVO.error(403, "token失效");
     }
 }
+

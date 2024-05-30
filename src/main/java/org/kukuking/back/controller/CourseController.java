@@ -9,6 +9,7 @@ import org.kukuking.back.component.ReqData;
 import org.kukuking.back.component.ResultVO;
 import org.kukuking.back.component.utils.TokenUtils;
 import org.kukuking.back.service.CourseService;
+import org.kukuking.back.service.OccupationService;
 import org.kukuking.back.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ import java.util.Map;
 public class CourseController {
     private final CourseService courseService;
     private final UserService userService;
+    private final OccupationService occupationService;
 
     @PostMapping("/getAll")
     public ResultVO getAll(@RequestBody ReqData<String> reqData) {
@@ -49,6 +51,7 @@ public class CourseController {
         String token = reqData.getToken();
         if (TokenUtils.verifyToken(token)) {
             courseService.deleteCourseById(reqData.getData());
+            occupationService.deleteByCourseId(reqData.getData());
             return ResultVO.success(Map.of());
         }
         return ResultVO.error(403, " token失效");

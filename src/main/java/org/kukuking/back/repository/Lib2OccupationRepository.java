@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Lib2OccupationRepository extends CrudRepository<Lib2Occupations, String> {
     @Query(value = """
-            select o.*,c.name as 'course_name',l.name as 'lib_name'
+            select o.*,
+            c.id as 'course_id',c.name as 'course_name',
+            l.id as 'lib_id',l.name as 'lib_name',l.type as 'lib_type'
             from occupation as o
             join course as c on o.course_id = c.id
             join lib as l on o.lib_id = l.id

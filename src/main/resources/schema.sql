@@ -44,8 +44,8 @@ create table if not exists `occupation`
     start_week  int      not null check ( start_week > 0 ),
     end_week    int      not null check ( end_week > 0),
     day         int      not null check ( day > 0 and day <= 7 ),
-    start_class int      not null check ( start_class > 0 and start_class <= 12),
-    end_class   int      not null check ( end_class > 0 and end_class <= 12),
+    start_time int      not null check ( start_time > 0 and start_time <= 12),
+    end_time   int      not null check ( end_time > 0 and end_time <= 12),
 
     create_time datetime not null default current_timestamp,
     update_time datetime not null default current_timestamp on update current_timestamp,

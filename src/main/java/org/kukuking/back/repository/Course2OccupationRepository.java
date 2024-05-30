@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface Course2OccupationRepository extends CrudRepository<Course2Occupations, String> {
     @Query(value = """
-            select o.*,c.name as 'course_name',l.name as 'lib_name'
+            select o.*,c.name as 'course_name',l.name as 'lib_name',c.*,c.id as 'course_id'
             from occupation as o
             join course as c on o.course_id = c.id
             join lib as l on o.lib_id = l.id
@@ -23,7 +23,7 @@ public interface Course2OccupationRepository extends CrudRepository<Course2Occup
     Course2Occupations findCourseOccupation(String courseId);
 
     @Query(value = """
-            select o.*,c.name as 'course_name',l.name as 'lib_name'
+            select o.*,c.name as 'course_name',l.name as 'lib_name',c.*,c.id as 'course_id'
             from occupation as o
             join course as c on o.course_id = c.id
             join lib as l on o.lib_id = l.id

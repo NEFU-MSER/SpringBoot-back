@@ -21,8 +21,8 @@ public class Course2OccupationResultSetExtractor implements ResultSetExtractor<C
         while (rs.next()) {
             if (course2Occupations.getCourse() == null) {
                 Course course = Course.builder()
-                        .id(rs.getString("id"))
-                        .name(rs.getString("name"))
+                        .id(rs.getString("course_id"))
+                        .name(rs.getString("course_name"))
                         .credit(rs.getDouble("credit"))
                         .time(rs.getDouble("time"))
                         .userId(rs.getString("user_id"))

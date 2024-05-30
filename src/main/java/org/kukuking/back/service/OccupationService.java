@@ -63,12 +63,40 @@ public class OccupationService {
     }
 
     @Transactional
-    public boolean deleteOccupation(String id) {
+    public boolean deleteById(String id) {
         try {
             if (id == null) {
                 return false;
             }
             occupationRepository.deleteById(id);
+            return true;
+        }catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public boolean deleteByCourseId(String courseId) {
+        try {
+            if (courseId == null) {
+                return false;
+            }
+            occupationRepository.deleteByCourseId(courseId);
+            return true;
+        }catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public boolean deleteByLibId(String libId) {
+        try {
+            if (libId == null) {
+                return false;
+            }
+            occupationRepository.deleteByLibId(libId);
             return true;
         }catch (Exception e) {
             log.error(e.getMessage());

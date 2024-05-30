@@ -4,10 +4,12 @@ package org.kukuking.back.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kukuking.back.DO.Lib;
+import org.kukuking.back.DO.Occupation;
 import org.kukuking.back.component.ReqData;
 import org.kukuking.back.component.ResultVO;
 import org.kukuking.back.component.utils.TokenUtils;
 import org.kukuking.back.service.LibService;
+import org.kukuking.back.service.OccupationService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Map;
 @CrossOrigin
 public class LibController {
     private final LibService libService;
+    private final OccupationService occupationService;
 
     @PostMapping("/getAll")
     public ResultVO getAll() {
@@ -37,6 +40,7 @@ public class LibController {
     @PostMapping("/idDelete")
     public ResultVO idDelete(@RequestBody String id) {
         libService.deleteLibById(id);
+        occupationService.deleteByLibId(id);
         return ResultVO.success(Map.of());
     }
 
