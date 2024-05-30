@@ -78,4 +78,16 @@ public class TokenUtils {
         }
         return account;
     }
+
+    public static String getId(String token){
+        String[] parts = token.split("\\.");
+        String loginDetail = parts[0];
+        String id = null;
+        try {
+            id = loginDetail.split("\"id\": \"")[1].split("\"")[0];
+        }catch (Exception e){
+            log.error(e.getMessage(), e);
+        }
+        return id;
+    }
 }

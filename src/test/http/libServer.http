@@ -8,12 +8,34 @@ POST http://localhost:8080/api/lib/add
 Content-Type: application/json
 
 {
-  "name": "102",
-  "type": "傻瓜实验室"
+  "token": "{\"account\": \"1234567890\", \"username\": \"吴京\", \"expires_at\": \"2024-05-29T10:10:41\"}.yRBYNxqy8scr5UNqnKvb5uXThpgUZyQzQbn3NkEAyUM=",
+  "data": {
+    "id": null,
+    "name": "811",
+    "type": "猪猪实验室 "
+  }
+}
+
+###
+POST http://localhost:8080/api/lib/change
+Content-Type: application/json
+
+{
+  "token": "{\"account\": \"1234567890\", \"username\": \"吴京\", \"expires_at\": \"2024-05-29T10:10:41\"}.yRBYNxqy8scr5UNqnKvb5uXThpgUZyQzQbn3NkEAyUM=",
+  "data": {
+    "id": "1245205265055096832",
+    "name": "811",
+    "type": "计算机实验室 "
+  }
 }
 
 ###
 POST http://localhost:8080/api/lib/typeGet
+
+计算机实验室
+
+###
+POST http://localhost:8080/api/lib/idDelete
 Content-Type: application/json
 
-"傻瓜实验室"
+1244637752521007104

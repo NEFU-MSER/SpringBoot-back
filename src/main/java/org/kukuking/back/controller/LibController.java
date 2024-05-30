@@ -6,11 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.kukuking.back.DO.Lib;
 import org.kukuking.back.component.ReqData;
 import org.kukuking.back.component.ResultVO;
-import org.kukuking.back.component.entity.LoginForm;
 import org.kukuking.back.component.utils.TokenUtils;
 import org.kukuking.back.service.LibService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -21,28 +21,43 @@ import java.util.Map;
 public class LibController {
     private final LibService libService;
 
-    @GetMapping("/get")
-    public ResultVO test() {
-        return ResultVO.success(Map.of("succeed", "成功"));
-    }
-
     @PostMapping("/getAll")
     public ResultVO getAll() {
-        return libService.getLibs();
+        List<Lib> libs = libService.getAllLibs();
+        return ResultVO.success(Map.of("libs", libs));
     }
 
     @PostMapping("typeGet")
     public ResultVO typeGet(@RequestBody String type) {
-        return libService.getLibsByType(type);
+        List<Lib> libs = libService.getAllLibsByType(type);
+        log.info("type:{},size{}", type, libs.size());
+        return ResultVO.success(Map.of("libs", libs));
     }
 
     @PostMapping("/idDelete")
     public ResultVO idDelete(@RequestBody String id) {
-        return libService.deleteLibById(id);
+        libService.deleteLibById(id);
+        return ResultVO.success(Map.of());
     }
 
     @PostMapping("/add")
-    public ResultVO add(@RequestBody Lib lib) {
-        return libService.addLib(lib);
+    public ResultVO add(@RequestBody ReqData<Lib> reqData) {
+        if (TokenUtils.verifyToken(reqData.getToken())) {
+            Lib lib = reqData.getData();
+            lib.setId(null);
+            libService.saveLib(lib);
+            return ResultVO.success(Map.of());
+        }
+        return ResultVO.error(403, "token失效");
+    }
+
+    @PostMapping("/change")
+    public ResultVO change(@RequestBody ReqData<Lib> reqData) {
+        if (TokenUtils.verifyToken(reqData.getToken())) {
+            Lib lib = reqData.getData();
+            libService.saveLib(lib);
+            return ResultVO.success(Map.of());
+        }
+        return ResultVO.error(403, "token失效");
     }
 }

@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/api/course/getAll
+Content-Type: application/json
+
+{
+  "token": "{\"account\": \"1234567890\", \"username\": \"吴京\", \"expires_at\": \"2024-05-29T15:10:59\"}.v1BBaaz4+ZUwf2BamdMuVbUlteb+npnkcZOIRXi50/g="
+}
+
+###
+POST http://localhost:8080/api/course/userGet
+Content-Type: application/json
+
+{
+  "token": "{\"account\": \"1234567890\", \"username\": \"吴京\", \"expires_at\": \"2024-05-29T15:10:59\"}.v1BBaaz4+ZUwf2BamdMuVbUlteb+npnkcZOIRXi50/g="
+}

@@ -28,7 +28,7 @@ public class UserController {
         User user = userService.getUserByAccount(loginForm.account);
         if (user != null) {
             if (user.getPassword().equals(loginForm.password)) {
-                token = TokenUtils.generateToken(new LoginDetail(user.getAccount(), user.getName(), 30));
+                token = TokenUtils.generateToken(new LoginDetail(user.getAccount(), user.getId(), 30));
                 return ResultVO.success(Map.of("token", token));
             } else {
                 return ResultVO.error(400, "密码错误");
@@ -43,7 +43,7 @@ public class UserController {
         User checkUser = userService.getUserByAccount(user.getAccount());
         if (checkUser == null) {
             userService.saveUser(user);
-            LoginDetail detail = new LoginDetail(user.getAccount(), user.getName(), 30);
+            LoginDetail detail = new LoginDetail(user.getAccount(), user.getId(), 30);
             token = TokenUtils.generateToken(detail.convert());
             return ResultVO.success(Map.of("token", token));
         }
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public ResultVO profile(@RequestBody ReqData<Integer> reqData) {
+    public ResultVO profile(@RequestBody ReqData<String> reqData) {
         if (TokenUtils.verifyToken(reqData.getToken())) {
             String account = TokenUtils.getAccount(reqData.getToken());
             if (account != null) {
@@ -62,9 +62,9 @@ public class UserController {
                 }
                 return ResultVO.error(400, "找不到该用户");
             }
-            return ResultVO.error(400, "token解析异常");
+            return ResultVO.error(403, "token解析异常");
         }
-        return ResultVO.error(400, "token失效");
+        return ResultVO.error(403, "token失效");
     }
 
     @PostMapping("/change")
@@ -73,12 +73,14 @@ public class UserController {
             String account = TokenUtils.getAccount(reqData.getToken());
             User user = reqData.getData();
             if (account != null && user != null) {
+                log.info("{}",account.equals(user.getAccount()));
                 if (account.equals(user.getAccount())) {
                     userService.updateUser(user);
+                    return ResultVO.success(Map.of());
                 }
             }
             return ResultVO.error(400, "数据缺失");
         }
-        return ResultVO.error(400, "token失效");
+        return ResultVO.error(403, "token失效");
     }
 }

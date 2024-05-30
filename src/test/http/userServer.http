@@ -9,6 +9,7 @@ Content-Type: application/json
   "account": "2021213196",
   "password": "112210ly"
 }
+
 ###
 POST http://localhost:8080/api/user/signIn
 Content-Type: application/json
@@ -33,7 +34,18 @@ Content-Type: application/json
 POST http://localhost:8080/api/user/change
 Content-Type: application/json
 
-{"token":"{\"account\": \"1234567890\", \"username\": \"123123\", \"expires_at\": \"2024-05-28T11:05:08\"}.K9+ISvnsmG2jynJxsl9X49Jma2V3ao2msoFBC/rPVwE=","data":{"id":"1244574091173335040","name":"123123","account":"1234567890","password":"123456","email":"123123@nefu.edu.cn","gender":1}}
+{
+  "token": "{\"account\": \"1234567890\", \"username\": \"123123\", \"expires_at\": \"2024-05-28T11:05:08\"}.K9+ISvnsmG2jynJxsl9X49Jma2V3ao2msoFBC/rPVwE=",
+  "data": {
+    "id": "1244574091173335040",
+    "name": "123123",
+    "account": "1234567890",
+    "password": "123456",
+    "email": "123123@nefu.edu.cn",
+    "gender": 1
+  }
+}
+
 ###
 POST http://localhost:8080/api/user/change
 Content-Type: application/json
