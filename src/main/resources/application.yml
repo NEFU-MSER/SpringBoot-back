@@ -2,12 +2,13 @@ spring:
   jackson:
     default-property-inclusion: non_null # 序列化时忽略空属性值
   datasource:
-    url: 'jdbc:mysql://116.63.13.220/2021213196'
-    username: 2021213196
-    password: 2021213196
-#    url: 'jdbc:mysql://localhost:3306/curriculum'
-#    username: kukuking
-#    password: 112210ly
+#    url: 'jdbc:mysql://116.63.13.220/2021213196'
+#    username: 2021213196
+#    password: 2021213196
+
+    url: 'jdbc:mysql://localhost:3306/his'
+    username: kukuking
+    password: 112210ly
   sql:
     init:
       mode: always
@@ -19,5 +20,5 @@ logging:
   pattern:
     console: '%-5level %C.%M[%line] - %msg%n'
 server:
-  port: 7788
+  port: 8080
 

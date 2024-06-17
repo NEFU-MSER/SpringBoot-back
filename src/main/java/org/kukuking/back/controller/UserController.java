@@ -22,6 +22,11 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
+    @GetMapping("/login")
+    public ResultVO test(){
+        return ResultVO.success(Map.of());
+    }
+
     @PostMapping("/login")
     public ResultVO login(@RequestBody LoginForm loginForm) {
         String token;
@@ -40,7 +45,7 @@ public class UserController {
     @PostMapping("/signIn")
     public ResultVO signIn(@RequestBody User user) {
         String token;
-        User checkUser = userService.getUserByAccount(user.getAccount());
+        User checkUser = userService.getUserByAccountOrIdCard(user.getAccount(), user.getIdCard());
         if (checkUser == null) {
             user.setId(null);
             userService.saveUser(user);

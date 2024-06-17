@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
+    public User getUserByAccountOrIdCard(String account, String idCard) {
+        return userRepository.findUserByAccountOrIdCard(account, idCard);
+    }
+
     public User getUserByAccount(String account){
         return userRepository.findUserByAccount(account);
     }

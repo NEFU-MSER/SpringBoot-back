@@ -12,6 +12,10 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
+    @Query(value = "select * from user as u where u.account = :account or u.id_card = :idCard",
+            rowMapperClass = UserRowMapper.class)
+    User findUserByAccountOrIdCard(String account, String idCard);
+
     @Query(value = "select * from user as u where u.account = :account",
             rowMapperClass = UserRowMapper.class)
     User findUserByAccount(String account);
