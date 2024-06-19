@@ -1,7 +1,7 @@
 package org.kukuking.back.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import org.kukuking.back.DO.User;
+import org.kukuking.back.DO.Role;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -9,17 +9,14 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Slf4j
-public class UserRowMapper implements RowMapper<User> {
+public class RoleRowMapper implements RowMapper<Role> {
     @Override
-    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return User.builder()
+    public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return Role.builder()
                 .id(rs.getString("id"))
-                .account(rs.getString("account"))
                 .name(rs.getString("name"))
-                .idCard(rs.getString("id_card"))
-                .email(rs.getString("email"))
-                .password(rs.getString("password"))
-                .gender(rs.getInt("gender"))
+                .departmentId(rs.getString("department_id"))
+                .expenses(rs.getDouble("expenses"))
                 .createTime(rs.getObject("create_time", LocalDateTime.class))
                 .updateTime(rs.getObject("update_time", LocalDateTime.class))
                 .build();

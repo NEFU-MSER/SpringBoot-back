@@ -1,0 +1,17 @@
+###
+POST http://localhost:8080/api/department/getAll
+
+###
+POST http://localhost:8080/api/department/add
+Content-Type: application/json
+
+{
+  "id": null,
+  "parentId": "1252507985168441344",
+  "name": "骨外科"
+}
+
+###
+POST http://localhost:8080/api/department/deleteAll
+Content-Type: application/json
+

@@ -1,7 +1,7 @@
 package org.kukuking.back.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import org.kukuking.back.DO.User;
+import org.kukuking.back.DO.Role;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -12,23 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class UserResultSetExtractor implements ResultSetExtractor<List<User>> {
+public class RoleResultSetExtractor implements ResultSetExtractor<List<Role>> {
     @Override
-    public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
-        List<User> users = new ArrayList<>();
+    public List<Role> extractData(ResultSet rs) throws SQLException, DataAccessException {
+        List<Role> roles = new ArrayList<>();
         while (rs.next()) {
-            users.add(User.builder()
+            roles.add(Role.builder()
                     .id(rs.getString("id"))
-                    .account(rs.getString("account"))
                     .name(rs.getString("name"))
-                    .idCard(rs.getString("id_card"))
-                    .email(rs.getString("email"))
-                    .password("")
-                    .gender(rs.getInt("gender"))
+                    .departmentId(rs.getString("department_id"))
+                    .expenses(rs.getDouble("expenses"))
                     .createTime(rs.getObject("create_time", LocalDateTime.class))
                     .updateTime(rs.getObject("update_time", LocalDateTime.class))
                     .build());
         }
-        return users;
+        return roles;
     }
 }
