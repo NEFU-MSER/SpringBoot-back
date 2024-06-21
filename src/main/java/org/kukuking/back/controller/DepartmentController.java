@@ -70,11 +70,11 @@ public class DepartmentController {
     @PostMapping("/deleteAll")
     public ResultVO deleteAll(@RequestBody List<String> idList) {
         try {
-            departmentService.delete(idList);
             List<Role> roles = roleService.findByDepartmentsId(idList);
             if(!roles.isEmpty()){
-                return ResultVO.error(405,"科室有下辖职位，不能删除");
+                return ResultVO.error(406,"科室有下辖职位，不能删除");
             }
+            departmentService.delete(idList);
             List<Department> departments = departmentService.findAll();
             return ResultVO.success(Map.of("departments", departments));
         }catch (Exception e) {

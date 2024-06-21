@@ -1,4 +1,4 @@
-package org.kukuking.back.mapper;
+package org.kukuking.back.extractor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.kukuking.back.DO.Department;
@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class DepartmentResultSetExtractor implements ResultSetExtractor<List<Dep
                     .name(rs.getString("name"))
                     .parentId(rs.getString("parent_id"))
                     .description(rs.getString("description"))
-                    .createTime(rs.getObject("create_time", LocalDateTime.class))
-                    .updateTime(rs.getObject("update_time", LocalDateTime.class))
                     .build());
         }
         return departments;

@@ -1,7 +1,7 @@
 package org.kukuking.back.repository;
 
 import org.kukuking.back.DO.Department;
-import org.kukuking.back.mapper.DepartmentResultSetExtractor;
+import org.kukuking.back.extractor.DepartmentResultSetExtractor;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -3,8 +3,8 @@ package org.kukuking.back.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.kukuking.back.DO.Role;
-import org.kukuking.back.repository.RoleRepository;
+import org.kukuking.back.DO.Patient;
+import org.kukuking.back.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,37 +13,32 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RoleService {
-    private final RoleRepository roleRepository;
+public class PatientService {
+    private final PatientRepository patientRepository;
 
-    public List<Role> findAll() {
-        return roleRepository.findAllRoles();
+    public List<Patient> findAll() {
+        return patientRepository.findAllPatients();
     }
 
-    public List<Role> findByDepartmentsId(List<String> rolesId){
-        return roleRepository.findAllByDepartmentIdIn(rolesId);
-    }
-
-
-    public Role findById(String id) {
-        return roleRepository.findById(id).orElse(null);
+    public Patient findById(String id) {
+        return patientRepository.findById(id).orElse(null);
     }
 
     @Transactional
-    public void save(Role role) {
+    public void save(Patient patient) {
         try {
-            roleRepository.save(role);
-        }catch (Exception e) {
+            patientRepository.save(patient);
+        } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Transactional
-    public void update(Role role){
+    public void update(Patient patient) {
         try {
-            roleRepository.save(role);
-        }catch (Exception e){
+            patientRepository.save(patient);
+        } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
@@ -52,18 +47,18 @@ public class RoleService {
     @Transactional
     public void delete(String id) {
         try {
-            roleRepository.deleteById(id);
-        }catch (Exception e){
+            patientRepository.deleteById(id);
+        } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Transactional
-    public void delete(List<String> idList){
+    public void delete(List<String> idList) {
         try {
-            roleRepository.deleteAllById(idList);
-        }catch (Exception e){
+            patientRepository.deleteAllById(idList);
+        } catch (Exception e) {
             log.error(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }

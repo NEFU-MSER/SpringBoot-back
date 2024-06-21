@@ -61,3 +61,25 @@ Content-Type: application/json
     "gender": 1
   }
 }
+
+###
+POST http://localhost:8080/api/tradeLog/getAll
+
+1253190251553103872
+
+###
+POST http://localhost:8080/api/patientCard/recharge
+Content-Type: application/json
+
+{
+  "cardId": "1253190251553103872",
+  "execute": 2000.1
+}
+
+###
+POST http://localhost:8080/api/registered/getAll
+Content-Type: application/json
+
+{
+  "id": "1252903807731245056"
+}

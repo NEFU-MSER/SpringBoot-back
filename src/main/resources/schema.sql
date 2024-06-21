@@ -61,6 +61,7 @@ create table if not exists `doctor`
     id          char(19)    not null primary key,
     role_id     char(19)    not null,
     id_card     char(18)    not null unique,
+    phone       char(11),
     email       varchar(50),
     name        varchar(50) not null,
     gender      int         not null check ( gender = 0 or gender = 1 ),
@@ -77,7 +78,7 @@ create table if not exists `patient`
     id          char(19)    not null primary key,
     id_card     char(18)    not null unique,
     email       varchar(50),
-    phone       char(11)    not null unique ,
+    phone       char(11)    not null unique,
     name        varchar(50) not null,
     gender      int         not null check ( gender = 0 or gender = 1 ),
 
@@ -91,7 +92,7 @@ create table if not exists `patient_card`
     id          char(19) not null primary key,
     patient_id  char(19) not null,
     balance     double   not null,
-    enable      boolean           default true,
+    enable      boolean  not null default true,
 
     create_time datetime not null default current_timestamp,
     update_time datetime not null default current_timestamp on update current_timestamp
@@ -100,8 +101,31 @@ create table if not exists `patient_card`
 # 交易表
 create table if not exists `trade_log`
 (
-    id      char(19) not null primary key,
-    card_id char(19) not null,
+    id          char(19) not null primary key,
+    card_id     char(19) not null,
+    execute     double   not null,
 
+    create_time datetime not null default current_timestamp,
+    update_time datetime not null default current_timestamp on update current_timestamp,
 
-)
+    index (card_id)
+);
+
+#处方表
+create table if not exists `prescription`
+(
+    id          char(19)   not null primary key,
+    doctor_id   char(19)   not null,
+    patient_id  char(19)   not null,
+    card_id     char(19)   not null,
+    cost        double     not null,
+    description mediumtext not null,
+    finish      boolean    not null default false,
+
+    create_time datetime   not null default current_timestamp,
+    update_time datetime   not null default current_timestamp on update current_timestamp,
+
+    index (card_id),
+    index (patient_id),
+    index (doctor_id)
+);

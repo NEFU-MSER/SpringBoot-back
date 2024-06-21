@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 @Slf4j
 public class UserRowMapper implements RowMapper<User> {
@@ -20,8 +19,6 @@ public class UserRowMapper implements RowMapper<User> {
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))
                 .gender(rs.getInt("gender"))
-                .createTime(rs.getObject("create_time", LocalDateTime.class))
-                .updateTime(rs.getObject("update_time", LocalDateTime.class))
                 .build();
     }
 }
